@@ -1,0 +1,156 @@
+
+<br><br>
+<br>
+<br>
+<div *ngIf="cartContent.length == 0; else elseBlock" class="alert alert-danger">
+  Your cart is empty!
+</div>
+<ng-template #elseBlock>
+  <div class="row">
+    <div class="col-md-9">
+      <button class="btn btn-outline-danger" (click)="clearCart()">
+        Clear Cart
+      </button>
+    </div>
+    <div class="col-md-3">
+      <div class="text-right">
+        <button class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">product name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price each (€)</th>
+        <th scope="col">Total price (€)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of cartContent;index as i">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ product.title }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.price * product.quantity }}</td>
+      </tr>
+      <tr *ngFor="let product2 of cartContent;index as i">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ product2.title }}</td>
+        <td>{{ product2.quantity }}</td>
+        <td>{{ product2.price }}</td>
+        <td>{{ product2.price * product.quantity }}</td>
+      </tr>
+      <tr *ngFor="let product2 of cartContent;index as i">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ product3.title }}</td>
+        <td>{{ product3.quantity }}</td>
+        <td>{{ product3.price }}</td>
+        <td>{{ product3.price * product.quantity }}</td>
+      </tr>
+    </tbody>
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" colspan="4" class="text-right">Pre-tax total: </th>
+        <th scope="col">{{ totalPrice | currency:'EUR ' }}</th>
+      </tr>
+      <tr>
+        <th scope="col" colspan="4" class="text-right">Tax amount (20%): </th>
+        <th scope="col">{{ totalPrice * TAX_RATE | currency:'EUR ' }}</th>
+      </tr>
+      <tr>
+        <th scope="col" colspan="4" class="text-right">Price inclusive VAT : </th>
+        <th scope="col">{{ totalPrice + (totalPrice * TAX_RATE) | currency:'EUR ' }}</th>
+      </tr>
+    </thead>
+  </table>
+</ng-template>
+
+
+<!-- template test -->
+<!-- https://freefrontend.com/bootstrap-shoping-carts/ -->
+
+
+
+<div class="card">
+  <div class="row">
+      <div class="col-md-8 cart">
+          <div class="title">
+              <div class="row">
+                  <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                  <div class="col align-self-center text-right text-muted">3 items</div>
+              </div>
+          </div>    
+          <div class="row border-top border-bottom">
+              <div class="row main align-items-center">
+                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                  <div class="col">
+                      <div class="row text-muted">Shirt</div>
+                      <div class="row">Cotton T-shirt</div>
+                  </div>
+                  <div class="col">
+                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                  </div>
+                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="row main align-items-center">
+                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
+                  <div class="col">
+                      <div class="row text-muted">Shirt</div>
+                      <div class="row">Cotton T-shirt</div>
+                  </div>
+                  <div class="col">
+                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                  </div>
+                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+              </div>
+          </div>
+          <div class="row border-top border-bottom">
+              <div class="row main align-items-center">
+                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                  <div class="col">
+                      <div class="row text-muted">Shirt</div>
+                      <div class="row">Cotton T-shirt</div>
+                  </div>
+                  <div class="col">
+                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                  </div>
+                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+              </div>
+          </div>
+          <div class="back-to-shop"><a href="#"></a><span class="text-muted">Back to shop</span></div>
+      </div>
+      <div class="col-md-4 summary">
+          <div><h5><b>Summary</b></h5></div>
+          <hr>
+          <div class="row">
+              <div class="col" style="padding-left:0;">ITEMS 3</div>
+              <div class="col text-right">&euro; 132.00</div>
+          </div>
+          <form>
+              <p>SHIPPING</p>
+              <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+              <p>GIVE CODE</p>
+              <input id="code" placeholder="Enter your code">
+          </form>
+          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+              <div class="col">TOTAL PRICE</div>
+              <div class="col text-right">&euro; 137.00</div>
+          </div>
+          <button class="btn">CHECKOUT</button>
+      </div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+

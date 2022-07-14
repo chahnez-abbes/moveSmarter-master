@@ -1,0 +1,215 @@
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="ll-search pb-6">
+  <div class="container">
+    <div class="border overflow-hidden sm:rounded-md p-5">
+      <div class="mb-3">
+        <div class="flex justify-between flex-wrap">
+          <h4>Find your need</h4>
+          <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button><mat-icon>tune</mat-icon> ADVANCED SEARCH</button>
+        </div>
+        <div class="mt-3 flex">
+          <input
+            type="text"
+            placeholder="I am looking for ..."
+            class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+            required
+          />
+          <button class="bg-primary w-24 rounded-r-md"><mat-icon class="leading-8">search</mat-icon></button>
+        </div>
+      </div>
+      <mat-expansion-panel [expanded]="advanceSearchExpanded">
+        <div class="grid grid-cols-6 gap-6 mt-4">
+          <div class="col-span-6 sm:col-span-3">
+            <input
+              type="text"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              placeholder="Start price"
+            />
+          </div>
+          <div class="col-span-6 sm:col-span-3">
+            <input
+              type="text"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              placeholder="End price"
+            />
+          </div>
+          <div class="col-span-6 sm:col-span-3">
+            <select
+              name="categories"
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option>Category</option>
+              <option>Microservices</option>
+              <option>Shipping Service</option>
+              <option>Consulting</option>
+            </select>
+          </div>
+          <div class="col-span-6 sm:col-span-3">
+            <select
+              name="rating"
+              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option>Rating</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="col-span-6">
+            <button mat-flat-button color="accent">Apply filter</button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Phones">
+    <div class="ll-products-area mb-24">
+      <div class="container">
+        <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
+          <div *ngFor="let product of dataArray" class="col-span-12 md:col-span-6 xl:col-span-4">
+            <mat-card class="ll-product">
+              <img mat-card-image [src]="product.images[0]" alt="{{ product.name }}" style="width: 100%; margin: 0 0 20px" />
+              <mat-card-content class="flex">
+                <div class="flex-none w-10">
+                  <img src="{{ product.created_by.avatar }}" alt="product?.created_by?.name" />
+                </div>
+                <div class="flex-grow pl-3">
+                  <h4 class="ll-product__creator">{{ product?.created_by?.name }}</h4>
+                  <h2 class="ll-product__name">
+                    <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+                  </h2>
+                  <div class="flex justify-between mt-5">
+                    <div class="ll-product__price-label">Prices:</div>
+                    <div class="ll-product__price text-accent font-bold">{{ product.price }}DNT</div>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="ll-product__action flex justify-between">
+                <div class="flex-1 text-center flex items-center justify-center">
+                  <mat-icon color="warn">star</mat-icon> {{ product.rating }}/5
+                </div>
+                <div class="flex-1 text-center">
+                  <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Read More</a>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+        <div *ngIf="!isLoaded">
+          <ngx-skeleton-loader 
+            count="9"
+            appearance="circle"
+            [theme]="{ 
+              'border-radius': '5px',
+              height: '280px',
+              width: 'calc(33% - 10px)'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="LAPTOP">
+    <div class="ll-products-area mb-24">
+      <div class="container">
+        <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
+          <div *ngFor="let product of laptopList" class="col-span-12 md:col-span-6 xl:col-span-4">
+            <mat-card class="ll-product">
+              <img mat-card-image [src]="product?.images[0]" alt="{{ product.name }}" style="width: 100%; margin: 0 0 20px" />
+             
+                <app-course-item [productItem]="product" (addToCart)="addToCart($event)"></app-course-item>
+              
+              <mat-card-actions class="ll-product__action flex justify-between">
+                <div class="flex-1 text-center flex items-center justify-center">
+                  <mat-icon color="warn">star</mat-icon> {{ product.rating }}/5
+                </div>
+                <div class="flex-1 text-center">
+                  <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Read More</a>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+        <div *ngIf="!isLoaded">
+          <ngx-skeleton-loader 
+            count="9"
+            appearance="circle"
+            [theme]="{ 
+              'border-radius': '5px',
+              height: '280px',
+              width: 'calc(33% - 10px)'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+ 
+    
+ 
+ <mat-tab label="GAMING">
+  <div class="ll-products-area mb-24">
+    <div class="container">
+      <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
+        <div *ngFor="let product of gamingList" class="col-span-12 md:col-span-6 xl:col-span-4">
+          <mat-card class="ll-product">
+            <app-course-item [productItem]="product" (addToCart)="addToCart($event)"></app-course-item>
+          </mat-card>
+        </div>
+      </div>
+      <div *ngIf="!isLoaded">
+        <ngx-skeleton-loader 
+          count="9"
+          appearance="circle"
+          [theme]="{ 
+            'border-radius': '5px',
+            height: '280px',
+            width: 'calc(33% - 10px)'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</mat-tab>
+<mat-tab label="OTHERS">
+  Content 1<br>
+  Content 1 <br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+</mat-tab>
+<mat-tab label="First">
+  Content 1<br>
+  Content 1 <br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+  Content 1<br>
+</mat-tab>
+</mat-tab-group>
+
