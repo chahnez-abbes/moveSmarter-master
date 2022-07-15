@@ -19,6 +19,7 @@ import { ClientModule } from "../clientspace/client.module";
 import { ClientRoutingModule } from '../clientspace/client-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ProductsComponent,
@@ -38,7 +39,8 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatMenuModule, 
     MatTabsModule,
-   ClientModule
+   ClientModule,
+   FormsModule
     
   ]
   

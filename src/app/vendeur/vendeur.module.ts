@@ -8,6 +8,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule, 
     MatMenuModule,
      MatTabsModule,
-     MatExpansionModule
+     MatExpansionModule,
+     FormsModule
   ]
 })
 export class VendeurModule { }

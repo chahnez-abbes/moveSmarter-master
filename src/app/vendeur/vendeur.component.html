@@ -1,7 +1,76 @@
 <p>vendeur works!</p>
 
-<ul *ngFor="let item of Arraydata">
+<!-- <ul *ngFor="let item of Arraydata">
 <li>{{item.id}}</li>
 <li>{{item.name}}</li>
 <li>{{item?.created_by.name}}</li>
-</ul>
+</ul> -->
+
+<!-- This is a button toggling the modal -->
+<button class="uk-button uk-button-danger uk-width-1-1" uk-toggle="target: #modal-example">Add new product </button>
+<!-- This is the modal -->
+<div id="modal-example" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+      <h4 class="uk-modal-title">Add  NEW PRODUCT</h4>
+
+<!--------------------form starting--------------------->
+<form #f="ngForm" (ngSubmit)="addproduct(f)">
+<br>
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-text">product name</label>
+
+  <div class="uk-form-controls">
+      <input class="uk-input"  type="text" name="productname" #title="ngModel" ngModel placeholder="product name...">
+  </div>
+</div>
+
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-select">Category</label>
+  <div class="uk-form-controls">
+      <select class="uk-select" id="form-horizontal-select" name="category" #title="ngModel" ngModel>
+          <option>phone</option>
+          <option>laptop</option>
+          <option>gaming stuff</option>
+          <option>home appliance</option>
+          <option>other</option>
+      </select>
+  </div>
+</div>
+
+<div class="uk-margin">
+  <div class="uk-form-label">product condition: </div>
+  <div class="uk-form-controls">
+    <select class="uk-select" id="form-horizontal-select" name="condition" #title="ngModel" ngModel>
+        <option>refreshed</option>
+        <option>new </option>
+    </select>
+</div>
+</div>
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-text">product price: </label>
+  <input class="uk-input uk-form-danger uk-form-width-medium" type="text" placeholder="00.00 DNT" value="00.00 DNT" name="price" #title="ngModel" ngModel>
+</div>    
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-text">About the product: </label>
+  <textarea class="uk-textarea" rows="5" placeholder="brief description" name="about" #title="ngModel" ngModel></textarea>
+</div>  
+<div uk-form-custom="target: true">
+  <label class="uk-form-label" for="form-horizontal-text">Add image: </label>
+  <input type="file" accept=".jpg,.png" (change)="uploadImage($event)">
+  <input class="uk-input uk-form-width-medium" type="text" placeholder="Select image" disabled>
+</div>
+
+       
+       
+        <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary" type="submit" >Save</button>
+            
+        </p>
+    
+    </form>
+  
+  </div>
+</div>
+
