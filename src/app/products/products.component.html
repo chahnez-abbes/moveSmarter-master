@@ -6,6 +6,7 @@
 <br>
 
 
+
 <div class="ll-search pb-6">
   <div class="container">
     <div class="border overflow-hidden sm:rounded-md p-5">
@@ -84,199 +85,752 @@
 <!--------------------form starting--------------------->
 <form #f="ngForm" (ngSubmit)="addproduct(f)">
 <br>
+
+
+
 <div class="uk-margin">
   <label class="uk-form-label" for="form-horizontal-text">product name</label>
 
   <div class="uk-form-controls">
-      <input class="uk-input"  type="text" name="productname" #title="ngModel" ngModel placeholder="product name...">
-  </div>
+      <input class="uk-input"  
+      type="text"
+       name="productname"
+        #productname="ngModel" 
+       ngModel required minlength="4" maxlength="20"
+       placeholder="product name..."  >
+       <p class="alert alert-danger" *ngIf="productname.errors?.required && productname.touched" > product name is required</p>
+       <p class="alert alert-danger" *ngIf="productname.errors?.minlength && productname.touched" > product name should be more then 8 caracter</p>
+       
+      </div>
 </div>
+
+
 
 <div class="uk-margin">
   <label class="uk-form-label" for="form-horizontal-select">Category</label>
   <div class="uk-form-controls">
-      <select class="uk-select" id="form-horizontal-select" name="category" #title="ngModel" ngModel>
+      <select class="uk-select" id="form-horizontal-select" name="category"
+       #category="ngModel" ngModel required>
           <option>phone</option>
           <option>laptop</option>
           <option>gaming stuff</option>
           <option>home appliance</option>
           <option>other</option>
       </select>
+      <p class="alert alert-danger" *ngIf="category.errors?.required && category.touched" >  category is required</p>
   </div>
 </div>
+
+<div class="uk-margin">
+  <div class="uk-form-label">payment method: </div>
+  <div class="uk-form-controls">
+    <select class="uk-select" id="form-horizontal-select"
+     name="payment" 
+     #payment="ngModel" ngModel required>
+        <option>money order</option>
+        <option>master card </option>
+        <option> cash on delivery </option>
+    </select>
+    <p class="alert alert-danger" *ngIf="payment.errors?.required && payment.touched" >  product oondition is required</p>
+</div>
+</div>
+
+
 
 <div class="uk-margin">
   <div class="uk-form-label">product condition: </div>
   <div class="uk-form-controls">
-    <select class="uk-select" id="form-horizontal-select" name="condition" #title="ngModel" ngModel>
+    <select class="uk-select" id="form-horizontal-select"
+     name="condition" 
+     #condition="ngModel" ngModel required>
         <option>refreshed</option>
         <option>new </option>
     </select>
+    <p class="alert alert-danger" *ngIf="condition.errors?.required && condition.touched" >  product oondition is required</p>
 </div>
 </div>
 <div class="uk-margin">
-  <label class="uk-form-label" for="form-horizontal-text">product price: </label>
-  <input class="uk-input uk-form-danger uk-form-width-medium" type="text" placeholder="00.00 DNT" value="00.00 DNT" name="price" #title="ngModel" ngModel>
-</div>    
+  <label class="uk-form-label" for="form-horizontal-text">product price: (price in dinars)</label>
+  <br> <input class="uk-input uk-form-danger uk-form-width-medium" type="number" placeholder="100 DNT" value="00.00 DNT" name="price" 
+  #price="ngModel" ngModel required >
+  <p class="alert alert-danger" *ngIf="price.errors?.required && price.touched" >  price is required</p>
+  
+</div>
+
+
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-text">market price: (price in dinars)</label>
+  <br> <input class="uk-input uk-form-danger uk-form-width-medium" type="number" placeholder="100 DNT" value="00.00 DNT" name="market" 
+  #market="ngModel" ngModel required >
+  <p class="alert alert-danger" *ngIf="market.errors?.required && market.touched" >  Market price is required</p>
+  
+</div>
+
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-text">shipping price : (price in dinars)</label>
+  <br><input class="uk-input uk-form-danger uk-form-width-medium" type="number" placeholder="00.00 DNT" value="8 DNT" name="shipping" 
+  #shipping="ngModel" ngModel required >
+  <p class="alert alert-danger" *ngIf="shipping.errors?.required && shipping.touched" >  Market price is required</p>
+  
+</div>
+<div class="uk-margin">
+  <label class="uk-form-label" for="form-horizontal-text">product amount :</label>
+ <br> <input class="uk-input uk-form-width-xsmall" type="number" placeholder="Qte" name="qte"
+  #qte="ngModel" ngModel required maxlength="3">
+
+  <p class="alert alert-danger" *ngIf="qte.errors?.required && qte.touched" >amount is required</p>
+</div>
+
 <div class="uk-margin">
   <label class="uk-form-label" for="form-horizontal-text">About the product: </label>
-  <textarea class="uk-textarea" rows="5" placeholder="brief description" name="about" #title="ngModel" ngModel></textarea>
+  <textarea class="uk-textarea" rows="5" placeholder="brief description" 
+  name="about" #about="ngModel" ngModel required minlength="20"></textarea>
+  <p class="alert alert-danger" *ngIf="about.errors?.required && about.touched" >  description is required</p>
+  <p class="alert alert-danger" *ngIf="about.errors?.minlength && about.touched" >  description should be more then 10 caractaire</p>
+
 </div>  
 <div uk-form-custom="target: true">
   <label class="uk-form-label" for="form-horizontal-text">Add image: </label>
-  <input type="file" accept=".jpg,.png" (change)="uploadImage($event)">
-  <input class="uk-input uk-form-width-medium" type="text" placeholder="Select image" disabled>
+  <input type="file" name="image" #image="ngModel" ngModel required accept=".jpg,.png" (change)="uploadImage($event)">
+  <input class="uk-input uk-form-width-medium"
+   type="text" placeholder="Select image" disabled>
+   <p class="alert alert-danger" *ngIf="image.errors?.required && image.touched" >  image is required</p>
 </div>
 
        
-       
+       <br>
+       <br>
         <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-danger uk-modal-close" type="button">Cancel</button>
-            <button class="uk-button uk-button-primary" type="submit" >Save</button>
-            
+        <p class="uk-text-center">
+          <button class="uk-button uk-button-danger uk-modal-close" type="reset">Cancel</button>
+            <button class="uk-button uk-button-primary" type="submit" [disabled]="f.invalid" >Save</button>
+           
         </p>
-    
+       
+
     </form>
   
   </div>
 </div>
-
-
 <br> <br>
+
+
+
+
+
+
+
+
+
+<!--phones-->
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Phones">
-    <div class="ll-products-area mb-24">
-      <div class="container">
-        <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
-          <div *ngFor="let product of dataArray" class="col-span-12 md:col-span-6 xl:col-span-4">
-            <mat-card class="ll-product">
-              <img mat-card-image [src]="product.images[0]" alt="{{ product.name }}" style="width: 100%; margin: 0 0 20px" />
-              <mat-card-content class="flex">
-                <div class="flex-none w-10">
-                  <img src="{{ product.created_by.avatar }}" alt="product?.created_by?.name" />
-                </div>
-                <div class="flex-grow pl-3">
-                  <h4 class="ll-product__creator">{{ product?.created_by?.name }}</h4>
-                  <h2 class="ll-product__name">
-                    <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
-                  </h2>
-                  <div class="flex justify-between mt-5">
-                    <div class="ll-product__price-label">Prices:</div>
-                    <div class="ll-product__price text-accent font-bold">{{ product.price }}DNT</div>
-                  </div>
-                </div>
-              </mat-card-content>
-              <mat-card-actions class="ll-product__action flex justify-between">
-                <div class="flex-1 text-center flex items-center justify-center">
-                  <mat-icon color="warn">star</mat-icon> {{ product.rating }}/5
-                </div>
-                <div class="flex-1 text-center">
-                  <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Read More</a>
-                </div>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
-        <div *ngIf="!isLoaded">
-          <ngx-skeleton-loader 
-            count="9"
-            appearance="circle"
-            [theme]="{ 
-              'border-radius': '5px',
-              height: '280px',
-              width: 'calc(33% - 10px)'
-            }"
-          ></ngx-skeleton-loader>
-        </div>
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab label="LAPTOP">
-    <div class="ll-products-area mb-24">
-      <div class="container">
-        <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
-          <div *ngFor="let product of laptopList" class="col-span-12 md:col-span-6 xl:col-span-4">
-            <mat-card class="ll-product">
-              <img mat-card-image [src]="product?.images[0]" alt="{{ product.name }}" style="width: 100%; margin: 0 0 20px" />
-             
-                <app-course-item [productItem]="product" (addToCart)="addToCart($event)"></app-course-item>
+    <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-10" *ngFor="let product of Array ; index as i"  >
+          <div *ngIf="product.category==='phone'">
+            <div class="row p-2 bg-white border rounded">
+              <div class="col-md-3 mt-1">
+              <!--product image -->  
+                <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+              </div>
               
-              <mat-card-actions class="ll-product__action flex justify-between">
-                <div class="flex-1 text-center flex items-center justify-center">
-                  <mat-icon color="warn">star</mat-icon> {{ product.rating }}/5
+              <!--product details -->
+                <div class="col-md-6 mt-1">
+                  <h5>{{ product.productname }}</h5>
+                  <div class="d-flex flex-row">
+                      <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                  </div>
+                  <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                  <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+
                 </div>
-                <div class="flex-1 text-center">
-                  <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Read More</a>
-                </div>
-              </mat-card-actions>
-            </mat-card>
+              <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                 
+                  <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" href="#modal-overflow" uk-toggle>Details</button>
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="addtocarte(i)" *ngIf="add!==i">Add to carte</button></div>
+             
+       
+                  </div>
+<div *ngIf="add===i">
+  <label>quantite availbel</label> <br>
+  <input type="number" value={{product.qte}} disabled> <br>
+  <label>how much you wanna buy </label> <br>
+<input type="number" class="form-control" value="1" placeholder="Amount" #qte > <br>
+<button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="buy(qte.value)">buy now !</button>
+</div>
+            
+
+
+                        <!--model startt-->
+             <div id="modal-overflow" uk-modal>
+              <div class="uk-modal-dialog">
+          
+                  <button class="uk-modal-close-default" type="button" uk-close></button>
+          
+                  <div class="uk-modal-header">
+                      <h2 class="uk-modal-title">Product</h2>
+                  </div>
+          
+                  <div class="uk-modal-body" uk-overflow-auto>
+          
+                    <!--product image -->
+                    
+                    <div class="img-zoom-container">
+                      <img  [src]="product.image" width="400" height="240" [alt]="product.productname">
+
+                    </div>
+                   
+                    <!--product image -->
+                    <div class="col-md-6 mt-1">
+                        <h5>{{ product.productname }}</h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                        <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+                        <p class="text-justify text para mb-0"><span class="dot"></span>description : {{ product.about }}<br><br></p>
+                        <p class="text-justify text-truncate para mb-0"><span class="dot"></span>payment method : {{ product.payment }}<br><br></p>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                      <h4 class="mr-1">{{ product.price }} Dnt</h4><span class="strike-text">{{ product.market }} Dnt</span>
+                  </div>
+                 
+                  
+                  <div class="uk-modal-footer uk-text-right">
+                      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                    
+                  </div>
+          
+              </div>
           </div>
-        </div>
-        <div *ngIf="!isLoaded">
-          <ngx-skeleton-loader 
-            count="9"
-            appearance="circle"
-            [theme]="{ 
-              'border-radius': '5px',
-              height: '280px',
-              width: 'calc(33% - 10px)'
-            }"
-          ></ngx-skeleton-loader>
-        </div>
+             <!--model end -->
+          </div>
+          </div>
+          </div>
       </div>
     </div>
+    
+  </mat-tab>
+  
+  
+  
+  
+  <mat-tab label="All products">
+    <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-10" *ngFor="let product of Array; index as i">
+          <div >
+            <div class="row p-2 bg-white border rounded">
+              <div class="col-md-3 mt-1">
+              <!--product image -->  
+                <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+              </div>
+              
+              <!--product details -->
+                <div class="col-md-6 mt-1">
+                  <h5>{{ product.productname }}</h5>
+                  <div class="d-flex flex-row">
+                      <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                  </div>
+                  <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                  <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+
+                </div>
+              <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                 
+                  <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" href="#modal-overflow" uk-toggle>Details</button>
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="addtocarte(i)" *ngIf="add!==i">Add to carte</button></div>
+             
+       
+                  </div>
+                  <div *ngIf="add===i">
+                    <label>quantite availbel</label> <br>
+                    <input type="number" value={{product.qte}} disabled> <br>
+                    <label>how much you wanna buy </label> <br>
+                  <input type="number" class="form-control" value="1" placeholder="Amount" #qte > <br>
+                  <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="buy(qte.value)">buy now !</button>
+                  </div>
+                        <!--model startt-->
+                        <div id="modal-overflow" uk-modal>
+                          <div class="uk-modal-dialog">
+                      
+                              <button class="uk-modal-close-default" type="button" uk-close></button>
+                      
+                              <div class="uk-modal-header">
+                                  <h2 class="uk-modal-title">Product</h2>
+                              </div>
+                      
+                              <div class="uk-modal-body" uk-overflow-auto>
+                      
+                                <!--product image -->
+                                
+                                <div class="img-zoom-container">
+                                  <img  [src]="product.image" width="400" height="240" [alt]="product.productname">
+            
+                                </div>
+                               
+                                <!--product image -->
+                                <div class="col-md-6 mt-1">
+                                    <h5>{{ product.productname }}</h5>
+                                    <div class="d-flex flex-row">
+                                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                                    </div>
+                                    <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                                    <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+                                    <p class="text-justify text para mb-0"><span class="dot"></span>description : {{ product.about }}<br><br></p>
+                                    <p class="text-justify text-truncate para mb-0"><span class="dot"></span>payment method : {{ product.payment }}<br><br></p>
+                                  </div>
+                                  
+                                </div>
+                                <div class="d-flex flex-row align-items-center">
+                                  <h4 class="mr-1">{{ product.price }} Dnt</h4><span class="strike-text">{{ product.market }} Dnt</span>
+                              </div>
+                             
+                              
+                              <div class="uk-modal-footer uk-text-right">
+                                  <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                                
+                              </div>
+                      
+                          </div>
+                      </div>
+             <!--model end -->
+          </div>
+          </div>
+          </div>
+      </div>
+    </div>
+    
+  </mat-tab>
+  
+  <mat-tab label="laptop">
+    <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-10" *ngFor="let product of Array; index as i ">
+          <div *ngIf="product.category==='laptop'">
+            <div class="row p-2 bg-white border rounded">
+              <div class="col-md-3 mt-1">
+              <!--product image -->  
+                <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+              </div>
+              
+              <!--product details -->
+                <div class="col-md-6 mt-1">
+                  <h5>{{ product.productname }}</h5>
+                  <div class="d-flex flex-row">
+                      <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                  </div>
+                  <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                  <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+
+                </div>
+              <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                 
+                  <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" href="#modal-overflow" uk-toggle>Details</button>
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="addtocarte(i)" *ngIf="add!==i">Add to carte</button></div>
+             
+       
+                  </div>
+                  <div *ngIf="add===i">
+                    <label>quantite availbel</label> <br>
+                    <input type="number" value={{product.qte}} disabled> <br>
+                    <label>how much you wanna buy </label> <br>
+                  <input type="number" class="form-control" value="1" placeholder="Amount" #qte > <br>
+                  <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="buy(qte.value)">buy now !</button>
+                  </div>
+                        <!--model startt-->
+             <div id="modal-overflow" uk-modal>
+              <div class="uk-modal-dialog">
+          
+                  <button class="uk-modal-close-default" type="button" uk-close></button>
+          
+                  <div class="uk-modal-header">
+                      <h2 class="uk-modal-title">Product</h2>
+                  </div>
+          
+                  <div class="uk-modal-body" uk-overflow-auto>
+          
+                    <!--product image -->
+                    
+                    <div class="img-zoom-container">
+                      <img  [src]="product.image" width="400" height="240" [alt]="product.productname">
+
+                    </div>
+                    <!-- <div class="col-md-3 mt-1">
+                      <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+                    </div> -->
+                    <!--product image -->
+                    <div class="col-md-6 mt-1">
+                        <h5>{{ product.productname }}</h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                        <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+                        <p class="text-justify text para mb-0"><span class="dot"></span>description : {{ product.about }}<br><br></p>
+                        <p class="text-justify text-truncate para mb-0"><span class="dot"></span>payment method : {{ product.payment }}<br><br></p>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                      <h4 class="mr-1">{{ product.price }} Dnt</h4><span class="strike-text">{{ product.market }} Dnt</span>
+                  </div>
+                 
+                  
+                  <div class="uk-modal-footer uk-text-right">
+                      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                    
+                  </div>
+          
+              </div>
+          </div>
+             <!--model end -->
+          </div>
+          </div>
+          </div>
+      </div>
+    </div>
+    
   </mat-tab>
  
     
- 
- <mat-tab label="GAMING">
-  <div class="ll-products-area mb-24">
-    <div class="container">
-      <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
-        <div *ngFor="let product of gamingList" class="col-span-12 md:col-span-6 xl:col-span-4">
-          <mat-card class="ll-product">
-            <app-course-item [productItem]="product" (addToCart)="addToCart($event)"></app-course-item>
-          </mat-card>
-        </div>
-      </div>
-      <div *ngIf="!isLoaded">
-        <ngx-skeleton-loader 
-          count="9"
-          appearance="circle"
-          [theme]="{ 
-            'border-radius': '5px',
-            height: '280px',
-            width: 'calc(33% - 10px)'
-          }"
-        ></ngx-skeleton-loader>
+  <mat-tab label="gaming">
+    <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-10" *ngFor="let product of Array ;index as i">
+          <div *ngIf="product.category==='gaming stuff'">
+            <div class="row p-2 bg-white border rounded">
+              <div class="col-md-3 mt-1">
+              <!--product image -->  
+                <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+              </div>
+              
+              <!--product details -->
+                <div class="col-md-6 mt-1">
+                  <h5>{{ product.productname }}</h5>
+                  <div class="d-flex flex-row">
+                      <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                  </div>
+                  <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                  <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+
+                </div>
+              <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                 
+                  <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" href="#modal-overflow" uk-toggle >Details</button>
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="addtocarte(i)" *ngIf="add!==i">Add to carte</button></div>
+             
+       
+                  </div>
+                  <div *ngIf="add===i">
+                    <label>quantite availbel</label> <br>
+                    <input type="number" value={{product.qte}} disabled> <br>
+                    <label>how much you wanna buy </label> <br>
+                  <input type="number" class="form-control" value="1" placeholder="Amount" #qte > <br>
+                  <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="buy(qte.value)">buy now !</button>
+                  </div>
+                        <!--model startt-->
+             <div id="modal-overflow" uk-modal *ngIf="det===i">
+              <div class="uk-modal-dialog">
+          
+                  <button class="uk-modal-close-default" type="button" uk-close></button>
+          
+                  <div class="uk-modal-header">
+                      <h2 class="uk-modal-title">Product</h2>
+                  </div>
+          
+                  <div class="uk-modal-body" uk-overflow-auto>
+          
+                    <!--product image -->
+                    
+                    <div class="img-zoom-container">
+                      <img  [src]="product.image" width="400" height="240" [alt]="product.productname">
+
+                    </div>
+                    <!-- <div class="col-md-3 mt-1">
+                      <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+                    </div> -->
+                    <!--product image -->
+                    <div class="col-md-6 mt-1">
+                        <h5>{{ product.productname }}</h5>
+                        <div class="d-flex flex-row">
+                            <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                        </div>
+                        <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                        <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+                        <p class="text-justify text para mb-0"><span class="dot"></span>description : {{ product.about }}<br><br></p>
+                        <p class="text-justify text-truncate para mb-0"><span class="dot"></span>payment method : {{ product.payment }}<br><br></p>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                      <h4 class="mr-1">{{ product.price }} Dnt</h4><span class="strike-text">{{ product.market }} Dnt</span>
+                  </div>
+                 
+                  
+                  <div class="uk-modal-footer uk-text-right">
+                      <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                    
+                  </div>
+          
+              </div>
+          </div>
+             <!--model end -->
+          </div>
+          </div>
+          </div>
       </div>
     </div>
+   
+  </mat-tab>
+   <!--others -->
+  <mat-tab label="others">
+    <div class="container mt-5 mb-5">
+      <div class="d-flex justify-content-center row">
+          <div class="col-md-10" *ngFor="let product of Array; index as i ">
+          <div *ngIf="product.category==='other'">
+            <div class="row p-2 bg-white border rounded">
+              <div class="col-md-3 mt-1">
+              <!--product image -->  
+                <img class="img-fluid img-responsive rounded product-image" [src]="product.image">
+              </div>
+              
+              <!--product details -->
+                <div class="col-md-6 mt-1">
+                  <h5>{{ product.productname }}</h5>
+                  <div class="d-flex flex-row">
+                      <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                  </div>
+                  <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                  <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+
+                </div>
+              <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                 
+                  <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" href="#modal-overflow" uk-toggle (click)="details(product.id)" >Details</button>
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="addtocarte(i)" *ngIf="add!==i">Add to carte</button></div>
+             
+       
+                  </div>
+
+                  <div *ngIf="add===i">
+                    <label>quantite availbel</label> <br>
+                    <input type="number" value={{product.qte}} disabled> <br>
+                    <label>how much you wanna buy </label> <br>
+                  <input type="number" class="form-control" value="1" placeholder="Amount" #qte > <br>
+                  <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="buy(qte.value)">buy now !</button>
+                  </div>
+                        <!--model startt--> 
+                        <div >
+                          <div id="modal-overflow" uk-modal >
+                            <div class="uk-modal-dialog">
+                        
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
+                        
+                                <div class="uk-modal-header">
+                                    <h2 class="uk-modal-title">{{product.productname}}</h2>
+                                </div>
+                        
+                                <div class="uk-modal-body" uk-overflow-auto>
+                        
+                                  <!--product image -->
+                                  
+                                  <div class="img-zoom-container">
+                                    <img  [src]="product.image" width="400" height="240" [alt]="product.productname">
+              
+                                  </div>
+                                
+                                  <!--product image -->
+                                  <div class="col-md-6 mt-1">
+                                      <h5>{{ product.productname }}</h5>
+                                      <div class="d-flex flex-row">
+                                          <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                                      </div>
+                                      <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                                      <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+                                      <p class="text-justify text para mb-0"><span class="dot"></span>description : {{ product.about }}<br><br></p>
+                                      <p class="text-justify text-truncate para mb-0"><span class="dot"></span>payment method : {{ product.payment }}<br><br></p>
+                                      <p class="text-justify text-truncate para mb-0"><span class="dot"></span>quantite : {{ product.qte }}<br><br></p>
+                                    </div>
+                                    
+                                  </div>
+                                  <div class="d-flex flex-row align-items-center">
+                                    <h4 class="mr-1">{{ product.price }} Dnt</h4><span class="strike-text">{{ product.market }} Dnt</span>
+                                </div>
+                               
+                                
+                                <div class="uk-modal-footer uk-text-right">
+                                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                                  
+                                </div>
+                        
+                            </div>
+                        </div>
+                        </div>
+          
+             <!--model end -->
+          </div>
+          </div>
+          </div>
+      </div>
+    </div>
+    
+  </mat-tab>
+
+  <!--your product -->
+<mat-tab label="your products">
+  <div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10" *ngFor="let product of Array">
+        <div *ngIf="product.uid===Uid">
+          <div class="row p-2 bg-white border rounded">
+            <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" [src]="product.image"></div>
+            <div class="col-md-6 mt-1">
+                <h5>{{ product.productname }}</h5>
+                <div class="d-flex flex-row">
+                    <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                </div>
+                <div class="mt-1 mb-1 spec-1"><span class="dot"></span> <span>category :{{ product.category }} <br></span><span class="dot"></span><span>published by : {{ product.user }} </span><span><br></span></div>
+                <div class="mt-1 mb-1 spec-1"> <span class="dot"></span><span> condition:{{ product.condition }} <br></span></div>
+                <p class="text-justify text-truncate para mb-0"><span class="dot"></span>description : {{ product.about }}<br><br></p>
+                <p class="text-justify text-truncate para mb-0"><span class="dot"></span>payment method : {{ product.payment }}<br><br></p>
+              </div>
+            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                <div class="d-flex flex-row align-items-center">
+                    <h4 class="mr-1">{{ product.price }} Dnt</h4><span class="strike-text">{{ product.market }} Dnt</span>
+                </div>
+                <h6 class="text-success">shipping price :{{ product.shipping }} Dnt</h6>
+                <div class="d-flex flex-column mt-4">
+                  <button class="btn btn-danger btn-sm" (click)="delete(product.id)">Delete</button>
+                  <button class="btn btn-outline-primary btn-sm mt-2" href="#modal-sections" uk-toggle >Update</button>
+                
+                   <!---model begin -->
+     
+      <div id="modal-sections" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Edit {{product.productname}} dtails</h2>
+            </div>
+            <div class="uk-modal-body">
+              <!--form start-->
+              <form >
+
+                 <!--name-->
+                <label class="block text-gray-700 text-sm font-semibold mb-2" > product name </label>
+                <input type="text" name="productname"  [(ngModel)]="product.productname"  >
+                
+                  <!--price-->
+                  <div class="uk-margin">
+                    <label class="uk-form-label" for="form-horizontal-text">product price: (price in dinars)</label>
+                    <br> <input class="uk-input uk-form-danger uk-form-width-medium" type="number"   name="price" 
+                   [(ngModel)]="product.price" >
+                   
+                    
+                  </div>
+                <!--market price-->
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-text">market price: (price in dinars)</label>
+                  <br> <input class="uk-input uk-form-danger uk-form-width-medium" type="number"  name="market" 
+                 [(ngModel)]="product.market" >
+                 
+                  
+                </div>
+                <!--shipping price-->
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-text">shipping price : (price in dinars)</label>
+                  <br><input class="uk-input uk-form-danger uk-form-width-medium" type="number" placeholder="00.00 DNT"  name="shipping" 
+                [(ngModel)]="product.shipping" >
+                 
+                  
+                </div>
+                <!--qte-->
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-text">product amount :</label>
+                 <br> <input class="uk-input uk-form-width-xsmall" type="number"  name="qte"
+                [(ngModel)]="product.qte">
+                
+                 
+                </div>
+                <!--about-->
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-text">About the product: </label>
+                  <textarea class="uk-textarea" rows="5" placeholder="brief description" 
+                  name="about" [(ngModel)]="product.about"></textarea>
+                
+                </div>  
+                <!--image-->
+                <!-- <div uk-form-custom="target: true">
+                  <label class="uk-form-label" for="form-horizontal-text">Add image: </label>
+                  <input type="file" name="image"  accept=".jpg,.png" (change)="uploadImage($event)">
+                  <input class="uk-input uk-form-width-medium"
+                   type="text" placeholder="Select image"  disabled>
+   
+                </div> -->
+
+                <!--category-->
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-select">Category</label>
+                  <div class="uk-form-controls">
+                      <select class="uk-select" id="form-horizontal-select" name="category"
+                      [(ngModel)]="product.category">
+                          <option>phone</option>
+                          <option>laptop</option>
+                          <option>gaming stuff</option>
+                          <option>home appliance</option>
+                          <option>other</option>
+                      </select>
+                     
+                  </div>
+                </div>
+                <!--payment method-->
+                <div class="uk-margin">
+                  <div class="uk-form-label">payment method: </div>
+                  <div class="uk-form-controls">
+                    <select class="uk-select" id="form-horizontal-select"
+                     name="payment" [(ngModel)]="product.payment">
+                        <option>money order</option>
+                        <option>master card </option>
+                        <option> cash on delivery </option>
+                    </select>
+                   
+                </div>
+                </div>
+                
+                <!--condition-->
+                
+                <div class="uk-margin">
+                  <div class="uk-form-label">product condition: </div>
+                  <div class="uk-form-controls">
+                    <select class="uk-select" id="form-horizontal-select"
+                     name="condition" 
+                    [(ngModel)]="product.condition">
+                        <option>refreshed</option>
+                        <option>new </option>
+                    </select>
+                  
+                </div>
+                </div>
+                 <!--form end-->
+              </form>
+              </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-primary" (click)="update(product)">Update Now !</button>
+            </div>
+        </div>
+    </div>
+ </div>
+ <!--model end -->
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
   </div>
-</mat-tab>
-<mat-tab label="OTHERS">
-  Content 1<br>
-  Content 1 <br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-</mat-tab>
-<mat-tab label="First">
-  Content 1<br>
-  Content 1 <br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
-  Content 1<br>
 </mat-tab>
 </mat-tab-group>
 

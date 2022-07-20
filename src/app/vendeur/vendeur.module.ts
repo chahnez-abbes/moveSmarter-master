@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
      MatTabsModule,
      MatExpansionModule,
+     SharedModule,
      FormsModule
   ]
 })

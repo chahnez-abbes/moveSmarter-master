@@ -24,163 +24,145 @@
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3">John Smith</h5>
-              <p class="text-muted mb-1">Full Stack Developer</p>
-              <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
-              <div class="d-flex justify-content-center mb-2">
-                <button type="button" class="btn btn-primary">Follow</button>
-                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+       
+              <div class="col-md-3 mt-1">
+                
+                <img class="img-fluid img-responsive rounded product-image" [src]="dataprofile.image">
               </div>
+              <h5 class="my-3">{{dataprofile.fname}}</h5>
+              <p class="text-muted mb-1">ID: {{dataprofile.uid}}</p>
+              <p class="text-muted mb-4">Interested to : {{dataprofile.interest}}</p>
+            
             </div>
           </div>
-          <div class="card mb-4 mb-lg-0">
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush rounded-3">
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fas fa-globe fa-lg text-warning"></i>
-                  <p class="mb-0">https://mdbootstrap.com</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                  <p class="mb-0">@mdbootstrap</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-              </ul>
-            </div>
-          </div>
+         
         </div>
         <div class="col-lg-8">
           <div class="card mb-4">
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Full Name</p>
+                  <p class="mb-0">Name: </p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Johnatan Smith</p>
+                  <p class="text-muted mb-0">{{dataprofile.fname}}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Email</p>
+                  <p class="mb-0">Email:</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">example@example.com</p>
+                  <p class="text-muted mb-0">{{dataprofile.email}}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Phone</p>
+                  <p class="mb-0">Phone:</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">(097) 234-5678</p>
+                  <p class="text-muted mb-0">(216) {{dataprofile.phone}}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Mobile</p>
+                  <p class="mb-0">Adress</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">(098) 765-4321</p>
+                  <p class="text-muted mb-0">{{dataprofile.adress}}</p>
                 </div>
               </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Address</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
-                </div>
-              </div>
+         
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6">
+         
+           
               <div class="card mb-4 mb-md-0">
                 <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Description
                   </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                  <div class="progress rounded mb-2" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
+                  <p class="mb-1" style="font-size: .80rem;">{{dataprofile.bio}}</p>
+
+              
+              
             </div>
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                  <div class="progress rounded mb-2" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+         
           </div>
         </div>
+      
       </div>
+      <button type="button" class="btn btn-outline-warning btn-lg " href="#modal-sections" uk-toggle >UPDATE</button>
+   
+      <!---model begin -->
+     
+      <div id="modal-sections" uk-modal>
+          <div class="uk-modal-dialog">
+              <button class="uk-modal-close-default" type="button" uk-close></button>
+              <div class="uk-modal-header">
+                  <h2 class="uk-modal-title">Edit Profile</h2>
+              </div>
+              <div class="uk-modal-body">
+                <!--form start-->
+                <form >
+
+                   <!--name-->
+                  <label class="block text-gray-700 text-sm font-semibold mb-2" > First name </label>
+                  <input type="text" name="fname"  [(ngModel)]="dataprofile.fname" >
+                  <!--interest-->
+                  <div class="mb-6 mt-6">
+                    <div class="block text-gray-700 text-sm font-semibold mb-2">you are interested to: </div>
+                    <div class="uk-form-controls">
+                      <select class="uk-select" id="form-horizontal-select"
+                       name="interest" 
+                        [(ngModel)]="dataprofile.interest">
+                          <option>selling products</option>
+                          <option>bying products </option>
+                        
+                      </select>
+                      
+                  </div>
+                  </div>
+                   <!--phone number-->
+                  <label class="block text-gray-700 text-sm font-semibold mb-2" > phone number: </label>
+                  <input type="tel" name="phone"  [(ngModel)]="dataprofile.phone" >
+                 <!--adress-->
+                  <div class="mb-6 mt-6">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="form-horizontal-text">Adress</label>
+                     <input class="uk-input uk-form-danger uk-form-width-medium" type="text" placeholder="Adress"  name="adress" 
+                     [(ngModel)]="dataprofile.adress"   >
+                  </div>
+                
+
+                <!--image-->
+
+                  <!-- <div class="mb-6 mt-6" uk-form-custom="target: true">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="form-horizontal-text">Update your image: </label>
+                    <input type="file" name="image"    accept=".jpg,.png" (change)="uploadImage($event)"  placeholder="Upload an Image" >
+                    <input class="uk-input uk-form-width-medium"
+                     type="text" disabled>
+ 
+                  </div> -->
+                   <!--bio-->
+                  <div class="mb-6 mt-6">
+                    <label class="block text-gray-700 text-sm font-semibold mb-2" for="form-horizontal-text">tell us somthing about you : </label>
+                    <textarea class="uk-textarea" rows="5" 
+                    name="bio" [(ngModel)]="dataprofile.bio" ></textarea>
+              
+                  </div> 
+                   <!--form end-->
+                </form>
+                </div>
+              <div class="uk-modal-footer uk-text-right">
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                  <button class="uk-button uk-button-primary" (click)="update()">Update Now !</button>
+              </div>
+          </div>
+      </div>
+   
+   <!--model end -->
     </div>
   </section>
 

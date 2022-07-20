@@ -23,6 +23,8 @@ this.service.SingIn(data.email,data.password).then((user)=>
   console.log("login")
 this.route.navigate(['/client'])
 
+localStorage.setItem("userconnect",user.user.uid)
+
    } )
   .catch(()=>{
 this.messageError="ce compte n'existe pas, verifier votre mail ou mot de passe "

@@ -25,6 +25,7 @@ import { ProductsComponent } from '../products/products.component';
 import { ProductDetailsComponent } from '../product/product-details/product-details.component';
 import { ProductsDetailsComponent } from '../products/product-details/product-details.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
 declarations:[
 ClientindexComponent,
@@ -38,7 +39,8 @@ ProfileComponent
 
 
 ],
-imports:[CommonModule, ClientRoutingModule, SharedModule, MatMenuModule, MatTabsModule,MatExpansionModule ],
+imports:[CommonModule, ClientRoutingModule, SharedModule, MatMenuModule, MatTabsModule,MatExpansionModule,FormsModule, ProductsModule
+ ],
 
 // this is the one who shared all the templates details
 

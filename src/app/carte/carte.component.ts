@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "src/app/services/cart.service";
 import { Productdb } from "../BD/products-list";
+import { shopping } from '../interfaces/shopping.interface';
 @Component({
   selector: 'app-carte',
   templateUrl: './carte.component.html',
@@ -8,41 +9,47 @@ import { Productdb } from "../BD/products-list";
 })
 export class CarteComponent implements OnInit {
 
-  public cartContent: any = [];
-  totalPrice: number = 0;
-  TAX_RATE: number = 0.2;
 
-  constructor( private cartService: CartService) {
+
+carte: shopping[]=[]
+
+
+  constructor( private cs: CartService) {
    }
 
   ngOnInit(): void {
-    this.getCartContentDetails();
-    this.computeTotalPrice();
-  }
+   this.cs.getcart().subscribe( cart =>{
+  this.carte=cart.map( shop=>{
+    return  {
+id: shop.payload.doc.id,
+// thabet fiha 
+qte: shop.payload.doc.data()['qte'],
+price: shop.payload.doc.data()['price'],
+productname: shop.payload.doc.data()['productname'],
+about: shop.payload.doc.data()['about'],
+image: shop.payload.doc.data()['image'],
 
-  getCartContentDetails() {
-    this.cartContent = this.cartService.cartContent;
-    for (let index = 0; index < this.cartContent.length; index++) {
-      const product = Productdb.filter(product => product.id == this.cartContent[index].id)[0];
-      this.cartContent[index].title = product.name;
-      this.cartContent[index].price = product.price;
+
     }
- 
   }
 
-  computeTotalPrice() {
-    // for (let index = 0; index < this.cartContent.length; index++) {
-    //   this.totalPrice += this.cartContent[index].price * this.cartContent[index].quantity;
-    // }
-    // or
-    this.cartContent.forEach((item: { price: number; quantity: number; }) => {
-      this.totalPrice += item.price * item.quantity;
-    });
+  )
+
+  // test 
+
+   })
   }
 
-  clearCart() {
-    this.cartService.clear();
-    this.ngOnInit();
-  }
 
+
+  delete(index){
+  
+this.cs.delete(this.carte[index].id)
+console.log("bow")
+  }
+  
+  update(index, qte){
+    this.cs.update(this.carte[index].id, qte)
+    console.log(index)
+  }
 }

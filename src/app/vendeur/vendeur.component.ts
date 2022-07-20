@@ -16,6 +16,9 @@ export class VendeurComponent implements OnInit {
   successMessage
   task: AngularFireUploadTask
   ref: AngularFireStorageReference
+  userN={
+    username:''
+  };
 
 
 
@@ -62,39 +65,55 @@ export class VendeurComponent implements OnInit {
 }
  
 ngOnInit(): void {
+  this.fs.collection("users").ref.doc(localStorage.getItem("userconnect")).get().then((data)=>{
+    console.log(data.data())
+  
+    this.userN.username=data.data()['fname']
+    console.log(this.userN.username)
+  })
+  
 } 
  
  
 uploadImage(event){
- const id=Math.random().toString(36).substring(2) 
- this.ref=this.fst.ref(id)
- this.task=this.ref.put(event.target.files[0])
- this.task.then((data)=>
- data.ref.getDownloadURL().then( url=>{
- this.img=url
- console.log("succes")
- })
- ) }
-
+  const id=Math.random().toString(36).substring(2) 
+  this.ref=this.fst.ref(id)
+  this.task=this.ref.put(event.target.files[0])
+  this.task.then((data)=>
+  data.ref.getDownloadURL().then( url=>{
+  this.img=url
+  console.log("succes")
+  })
+  )
+ 
+ 
+ }
+ 
+ 
  addproduct(f){
-  let data=f.value
-  /// to add more then one product delete .doc(this.Uid) 
-  this.fs.collection("products").add({
-    productname: data.productname,
-    category: data.category,
-    condition: data.condition,
-    price: data.price,
-    about: data.about,
-   image: this.img,
-    uid:this.Uid
-  
-  }).then(()=>{
-  
-    this.successMessage="added seccesfully"
-  }).catch(()=>{
-    console.log('error add')
-    })
-  }
+ let data=f.value
+ /// to add more then one product delete .doc(this.Uid) 
+ this.fs.collection("product").doc().set({
+   productname: data.productname,
+   category: data.category,
+   condition: data.condition,
+   price: data.price,
+   about: data.about,
+  image: this.img,
+   uid:this.Uid,
+   user: this.userN.username,
+   market: data.market,
+   shipping:data.shipping,
+   payment:data.payment,
+   qte: data.qte
+ 
+ }).then(()=>{
+ 
+   this.successMessage="added seccesfully"
+ }).catch(()=>{
+   console.log('error add')
+   })
+ }
 }
  
 

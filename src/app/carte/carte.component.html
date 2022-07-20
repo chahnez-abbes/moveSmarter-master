@@ -2,11 +2,9 @@
 <br><br>
 <br>
 <br>
-<div *ngIf="cartContent.length == 0; else elseBlock" class="alert alert-danger">
-  Your cart is empty!
-</div>
+
 <ng-template #elseBlock>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-9">
       <button class="btn btn-outline-danger" (click)="clearCart()">
         Clear Cart
@@ -17,9 +15,9 @@
         <button class="btn btn-primary">Confirm</button>
       </div>
     </div>
-  </div>
+  </div> -->
   <br>
-  <table class="table">
+  <table class="table"  >
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -30,27 +28,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of cartContent;index as i">
+      <tr *ngFor="let product of carte ;index as i">
         <th scope="row">{{ i+1 }}</th>
-        <td>{{ product.title }}</td>
-        <td>{{ product.quantity }}</td>
+        <td>{{ product.productname }}</td>
+        <td>{{ product.qte }}</td>
         <td>{{ product.price }}</td>
-        <td>{{ product.price * product.quantity }}</td>
+        <td>{{ product.price * product.qte }}</td>
       </tr>
-      <tr *ngFor="let product2 of cartContent;index as i">
-        <th scope="row">{{ i+1 }}</th>
-        <td>{{ product2.title }}</td>
-        <td>{{ product2.quantity }}</td>
-        <td>{{ product2.price }}</td>
-        <td>{{ product2.price * product.quantity }}</td>
-      </tr>
-      <tr *ngFor="let product2 of cartContent;index as i">
-        <th scope="row">{{ i+1 }}</th>
-        <td>{{ product3.title }}</td>
-        <td>{{ product3.quantity }}</td>
-        <td>{{ product3.price }}</td>
-        <td>{{ product3.price * product.quantity }}</td>
-      </tr>
+      
+      
     </tbody>
     <thead class="thead-light">
       <tr>
@@ -84,45 +70,30 @@
                   <div class="col align-self-center text-right text-muted">3 items</div>
               </div>
           </div>    
-          <div class="row border-top border-bottom">
+          <div class="row border-top border-bottom" *ngFor="let product of carte; index as i " >
               <div class="row main align-items-center">
-                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                  <div class="col-2"><img class="img-fluid" [src]="product.image"></div>
                   <div class="col">
-                      <div class="row text-muted">Shirt</div>
-                      <div class="row">Cotton T-shirt</div>
+                      <div class="row ">{{product.productname}}</div>
+                      <div class="row text-muted">{{product.about}}</div>
                   </div>
                   <div class="col">
-                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                      <input  type="number" class="border"  value="{{product.qte}}" #qte > 
                   </div>
-                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-              </div>
+                  <div class="col"><span class="close">&#10005;</span>DNT {{product.price}}</div> <div class="col">Total: {{product.price*product.qte|| currency}} DNT 
+         
+                </div>
+                <div class="close2">
+                  <div class="uk-button-group">
+                      <button class="uk-button uk-button-danger uk-button-small" (click)="update(i,qte.value)">Update</button>
+                      <button class="uk-button uk-button-secondary uk-button-small" (click)="delete(i)">delete</button>
+                      <button class="uk-button uk-button-Primary uk-button-small">save</button>
+                  </div>
+              </div>>
+
           </div>
-          <div class="row">
-              <div class="row main align-items-center">
-                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                  <div class="col">
-                      <div class="row text-muted">Shirt</div>
-                      <div class="row">Cotton T-shirt</div>
-                  </div>
-                  <div class="col">
-                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                  </div>
-                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-              </div>
-          </div>
-          <div class="row border-top border-bottom">
-              <div class="row main align-items-center">
-                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                  <div class="col">
-                      <div class="row text-muted">Shirt</div>
-                      <div class="row">Cotton T-shirt</div>
-                  </div>
-                  <div class="col">
-                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                  </div>
-                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-              </div>
-          </div>
+       
+       
           <div class="back-to-shop"><a href="#"></a><span class="text-muted">Back to shop</span></div>
       </div>
       <div class="col-md-4 summary">

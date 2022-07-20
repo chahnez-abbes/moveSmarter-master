@@ -28,8 +28,9 @@ import { FormsModule } from '@angular/forms';
 
   ],
   imports: [
+
     CommonModule,
-    RouterModule,
+
     ProductsRoutingModule,
     MatExpansionModule,
     NgParticlesModule,
@@ -39,8 +40,10 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatMenuModule, 
     MatTabsModule,
-   ClientModule,
-   FormsModule
+  
+   FormsModule,
+   SharedModule
+  
     
   ]
   

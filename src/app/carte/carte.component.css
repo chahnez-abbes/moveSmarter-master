@@ -76,6 +76,11 @@ a{
   margin-left: auto;
   font-size: 0.7rem;
 }
+.close2{
+  scroll-margin-inline-end: auto;
+  font-size: 1rem;
+  position: static;
+}
 img{
   width: 3.5rem;
 }

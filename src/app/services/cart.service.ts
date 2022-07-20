@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from "./local-storage.service";
 
 import { Product } from "../BD/products.module";
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,45 +12,28 @@ import { Product } from "../BD/products.module";
 export class CartService {
   public cartContent: any = [];
 
-  constructor(
-    private localStorageService: LocalStorageService
-  ) {
-    this.cartContent = this.load();
+  constructor( private fs:AngularFirestore, as:AuthService) {
+    
+  }
+  userid=localStorage.getItem("userconnect")
+  addtocarte(data){
+   return   this.fs.collection(`users/${this.userid}/cart`).add(data)
   }
 
-  add(productID?: string) {
-    this.cartContent.filter((elem: Product) => elem.id === productID)[0] ? this.cartContent.filter((elem: Product) => elem.id === productID)[0].quantity++ : this.cartContent.push({id: productID, quantity: 1});
-    // equivalent to
-    // if(this.cartContent.filter(elem => elem.id === id)[0]) {
-    //   this.cartContent.filter(elem => elem.id === id)[0].quantity++
-    // } else {
-    //   this.cartContent.push({id: id, quantity: 1})
-    // }
-    // Hedi's question
-    // if(!this.cartContent.filter(elem => elem.id === id)[0]) {
-    //   this.cartContent.push({id: id, quantity: 1})
-    // }
+ getcart(){
+  return   this.fs.collection(`users/${this.userid}/cart`).snapshotChanges()
+ }
 
-    this.localStorageService.set('cart', this.cartContent);
-  }
-
-  load() {
-    return this.localStorageService.get('cart')
-  }
-
-  clear() {
-    // 1st method
-    this.cartContent = [];
-    this.localStorageService.set('cart', this.cartContent);
-
-    // 2nd method
-    // this.localStorageService.clear('cart');
-  }
+ delete(id){
+  return this.fs.doc(`users/${this.userid}/cart/${id}`).delete()
+ }
+ 
+ update(id, qte){
+  return this.fs.doc(`users/${this.userid}/cart/${id}`).update({qte})
+ }
 
 
-  // public get() {
-  //   return this.cartContent;
-  // }
+  
 
 }
 

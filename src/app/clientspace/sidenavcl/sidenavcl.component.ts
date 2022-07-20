@@ -19,7 +19,7 @@ export class SidenavclComponent implements OnInit {
   logout(){
  this.sa.signOut().then(()=>{ 
   
-
+localStorage.removeItem("userconnect")
   
   this.route.navigate(['/auth/login'])
   console.log("bravo")
